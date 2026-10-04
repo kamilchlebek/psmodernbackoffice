@@ -20,6 +20,11 @@
   <a href="https://github.com/kamilchlebek/psmodernbackoffice/releases/latest/download/psmodernbackoffice.zip"><b>⬇️ Download psmodernbackoffice.zip</b></a>
 </p>
 
+<p align="center">
+  <img src="docs/orders.png" alt="Orders list in the PrestaShop 9 back office with Modern Back Office enabled" width="100%">
+  <br><sub>Orders list with Modern Back Office enabled (sample data)</sub>
+</p>
+
 ---
 
 ## Why?
