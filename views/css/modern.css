@@ -1,0 +1,554 @@
+/*
+ * Modern Back Office for PrestaShop 9
+ * CSS only. No core modifications.
+ *
+ * Selectors start with "html body" / "html:root" instead of body.ps_back-office because:
+ * - Symfony pages (default_layout.html.twig) have no ps_back-office class on <body>,
+ * - on those pages theme.css loads AFTER this file, so higher specificity is required.
+ */
+
+/* ---------- Design tokens ---------- */
+html:root {
+    --psm-accent: #3f5bd6;
+    --psm-accent-dark: #2f47b0;
+    --psm-accent-soft: #e0e7fd;
+    --psm-bg: #dde3ec;
+    --psm-surface: #f5f7fa;
+    --psm-surface-soft: #e9edf3;
+    --psm-input: #fbfcfd;
+    --psm-border: #cbd3df;
+
+    /* Tables - blue tint */
+    --psm-table-head: #e1e7f6;
+    --psm-table-stripe: #edf1fb;
+    --psm-table-filter: #e8edf9;
+    --psm-table-hover: #dce5fc;
+    --psm-table-border: #d3dbeb;
+
+    /* Dark sidebar */
+    --psm-nav-bg: #1e293b;
+    --psm-nav-bg-sub: #172131;
+    --psm-nav-hover: #2b3a52;
+    --psm-nav-text: #c2cad8;
+    --psm-nav-muted: #8d99ad;
+    --psm-text: #253044;
+    --psm-muted: #525d6e;
+    /* Statuses: text / soft background / border - min. 5.5:1 text-to-background contrast */
+    --psm-success: #0f6b3b;
+    --psm-success-soft: #dcf1e5;
+    --psm-success-border: #9fd6b7;
+    --psm-warning: #8a4b00;
+    --psm-warning-soft: #ffedcc;
+    --psm-warning-border: #f2c77a;
+    --psm-danger: #a61f1f;
+    --psm-danger-soft: #fde2e2;
+    --psm-danger-border: #f0a8a8;
+    --psm-info: #075c78;
+    --psm-info-soft: #dceff7;
+    --psm-info-border: #9cd2e6;
+    --psm-radius: 10px;
+    --psm-radius-sm: 7px;
+}
+
+/* ---------- PrestaShop 9 Core Design Kit palette ---------- */
+/* These variables are the official PS9 UI Kit tokens. */
+html:root {
+    /* In PS9 primary-* is a NEUTRAL scale: 600 = secondary text, 500 = disabled button
+       background / placeholder, 400 = borders and tags - it must stay grey, not blue */
+    --cdk-primary-800: #26354a;
+    --cdk-primary-700: #344766;
+    --cdk-primary-600: #4b5768;
+    --cdk-primary-500: #8a95a7;
+    --cdk-primary-400: #b8c2d1;
+    --cdk-primary-300: #d5dce6;
+    --cdk-primary-200: #e6eaf0;
+    --cdk-primary-100: #eef1f5;
+
+    /* *-500 are solid button/badge backgrounds with white text - min. 5:1 contrast */
+    --cdk-blue-700: #175a8f;
+    --cdk-blue-500: #1d6fb0;
+    --cdk-blue-300: #8fbde3;
+    --cdk-blue-100: #d6e8f7;
+    --cdk-blue-50: #e8f1fa;
+    --cdk-green-500: #15803d;
+    --cdk-green-300: #4caf72;
+    --cdk-green-100: #c9ebd6;
+    --cdk-green-50: #e3f5ea;
+    --cdk-yellow-500: #f5a524; /* the theme uses dark text on warning */
+    --cdk-yellow-300: #f9cb7a;
+    --cdk-yellow-100: #ffe9c2;
+    --cdk-yellow-50: #fff3dc;
+    --cdk-red-700: #9b2424;
+    --cdk-red-500: #c53030;
+    --cdk-red-300: #e06666;
+    --cdk-red-100: #f9cdcd;
+    --cdk-red-50: #fde6e6;
+}
+
+/* ---------- Global ---------- */
+html body {
+    background: var(--psm-bg) !important;
+    color: var(--psm-text);
+}
+
+html body #main,
+html body #content {
+    background: transparent;
+}
+
+html body a {
+    color: var(--psm-accent);
+}
+
+html body a:hover,
+html body a:focus {
+    color: var(--psm-accent-dark);
+}
+
+/* ---------- Header ---------- */
+html body #header {
+    box-shadow: 0 1px 0 rgba(16,24,40,.08), 0 3px 12px rgba(16,24,40,.04);
+}
+
+/* ---------- Left navigation ---------- */
+html body .nav-bar {
+    --cdk-sidebar-category-color: var(--psm-nav-muted);
+    --cdk-sidebar-icon-color: var(--psm-nav-text);
+    --cdk-sidebar-icon-active: #ffffff;
+    --cdk-sidebar-link-color: var(--psm-nav-text);
+    --cdk-sidebar-link-color-hover: #ffffff;
+    --cdk-sidebar-link-color-active: #ffffff;
+    --cdk-sidebar-link-bg-hover: var(--psm-nav-hover);
+    --cdk-sidebar-link-bg-active: var(--psm-nav-hover);
+    --cdk-sidebar-link-lvl-one-bg-active: var(--psm-nav-hover);
+    --cdk-sidebar-submenu-bg: var(--psm-nav-bg-sub);
+    background: var(--psm-nav-bg);
+    border-right: 0;
+    box-shadow: 2px 0 12px rgba(16,24,40,.12);
+}
+
+html body .nav-bar a,
+html body .nav-bar .link-levelone,
+html body .nav-bar .link-leveltwo {
+    color: var(--psm-nav-text);
+    transition: background .15s ease, color .15s ease, box-shadow .15s ease;
+}
+
+html body .nav-bar a:hover,
+html body .nav-bar .link-levelone:hover,
+html body .nav-bar .link-leveltwo:hover {
+    background: var(--psm-nav-hover);
+    color: #ffffff;
+}
+
+html body .nav-bar .link-active > .link,
+html body .nav-bar .link-levelone-active > .link {
+    background: var(--psm-nav-hover);
+    color: #ffffff;
+    box-shadow: inset 3px 0 0 var(--psm-accent);
+}
+
+/* ---------- Page title toolbar (plain white by default) ---------- */
+html body .header-toolbar {
+    background: var(--psm-surface-soft);
+    border-bottom-color: var(--psm-border);
+}
+
+/* ---------- Common surfaces ---------- */
+html body .card,
+html body .panel,
+html body .card-block,
+html body .card-body,
+html body .bootstrap .panel {
+    border-color: var(--psm-border);
+}
+
+html body .card,
+html body .panel {
+    border-radius: var(--psm-radius);
+    box-shadow: 0 1px 2px rgba(16,24,40,.035), 0 5px 18px rgba(16,24,40,.035);
+    background: var(--psm-surface);
+}
+
+html body .card-header {
+    background: var(--psm-surface-soft);
+    border-color: var(--psm-border);
+    color: #344054;
+}
+
+/* Nested panels (e.g. dashboard tabs) - no double shadow/border */
+html body .panel .panel {
+    box-shadow: none;
+}
+
+/* In legacy panels .panel-heading is just a title inside the panel padding -
+   a background would render an inset bar with a border around it (e.g. dashboard) */
+html body .panel-heading {
+    background: transparent;
+    border-color: var(--psm-border);
+    color: #344054;
+}
+
+/* ---------- Buttons ---------- */
+html body .btn {
+    border-radius: var(--psm-radius-sm);
+    box-shadow: none;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .12s ease;
+}
+
+html body .btn:hover {
+    transform: translateY(-1px);
+}
+
+html body .btn-primary:not(:disabled):not(.disabled) {
+    background: var(--psm-accent);
+    border-color: var(--psm-accent);
+}
+
+html body .btn-primary:not(:disabled):not(.disabled):hover,
+html body .btn-primary:not(:disabled):not(.disabled):focus {
+    background: var(--psm-accent-dark);
+    border-color: var(--psm-accent-dark);
+    box-shadow: 0 3px 9px rgba(63,91,214,.25);
+}
+
+html body .btn-secondary,
+html body .btn-default {
+    background: var(--psm-input);
+    border-color: var(--psm-border);
+    color: #344054;
+}
+
+html body .btn-secondary:hover,
+html body .btn-default:hover {
+    background: var(--psm-surface-soft);
+    border-color: #aab2c0;
+}
+
+/* ---------- Form controls ---------- */
+html body .form-control,
+html body select.form-control,
+html body textarea.form-control,
+html body .custom-select {
+    border: 1px solid var(--psm-border);
+    border-radius: var(--psm-radius-sm);
+    background: var(--psm-input);
+    color: var(--psm-text);
+    box-shadow: 0 1px 2px rgba(16,24,40,.025);
+}
+
+html body .form-control:focus,
+html body select.form-control:focus,
+html body textarea.form-control:focus,
+html body .custom-select:focus {
+    border-color: var(--psm-accent);
+    box-shadow: 0 0 0 3px rgba(63,91,214,.18);
+}
+
+html body label {
+    color: #344054;
+}
+
+/* ---------- Tables ----------
+ * Custom blue-tinted tokens - the --cdk-primary-* scale is neutral (grey), and both legacy
+ * tables (.bootstrap .table) and Symfony grids take stripes/hover/filters from it.
+ */
+html body .table {
+    background: var(--psm-surface);
+    color: var(--psm-text);
+}
+
+/* .bootstrap .table thead>tr>th in the legacy theme has higher specificity
+   (thick primary-800 line, font-weight 400), hence the second selector */
+html body .table thead th,
+html body .bootstrap .table thead > tr > th {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: #3b4a63;
+    vertical-align: bottom;
+    background: var(--psm-table-head);
+    border-bottom: 1px solid var(--psm-table-border);
+}
+
+html body .table td,
+html body .table th {
+    border-color: var(--psm-table-border);
+}
+
+/* legacy: cells have a --cdk-white background */
+html body .bootstrap .table tbody > tr > td {
+    background-color: var(--psm-surface);
+}
+
+html body .bootstrap .table tbody > tr.odd > td,
+html body .table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--psm-table-stripe);
+}
+
+html body .bootstrap .table thead > tr.filter > th,
+html body .table thead .column-filters,
+html body .table thead .column-filters th {
+    background-color: var(--psm-table-filter);
+}
+
+html body .table tbody tr:hover,
+html body .grid table.grid-table tbody tr:hover,
+html body .bootstrap .table tbody > tr:hover > td {
+    background-color: var(--psm-table-hover);
+}
+
+/* Dashboard, recent orders: products, total and date (cols 2-4) without line wrapping */
+html body #table_recent_orders td:nth-child(n+2):nth-child(-n+4) {
+    white-space: nowrap;
+}
+
+/* ---------- Dashboard (legacy, hardcoded #1d1d1b / #fff in theme) ---------- */
+
+/* Section headers (Pending, Notifications, Traffic...) - black by default */
+html body .bootstrap #dashboard section > section header {
+    padding: .375rem .625rem;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: var(--psm-text);
+    background-color: var(--psm-table-head);
+    border-left: 3px solid var(--psm-accent);
+    border-radius: var(--psm-radius-sm);
+}
+
+/* Stats list rows */
+html body .bootstrap #dashboard .data_list li {
+    background-color: var(--psm-surface);
+    border-color: var(--psm-border);
+}
+
+/* Tabs (nav-pills) - compact, single line, no black background */
+html body .bootstrap .nav-pills {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: .25rem;
+    overflow-x: auto;
+}
+
+html body .bootstrap #dashboard #dashproducts nav {
+    text-transform: none;
+}
+
+html body .bootstrap .nav-pills > li {
+    float: none;
+    flex: 0 0 auto;
+}
+
+html body .bootstrap .nav-pills > li + li {
+    margin-left: 0;
+}
+
+html body .bootstrap .nav-pills > li > a {
+    padding: .4rem .7rem;
+    font-size: 12px;
+    white-space: nowrap;
+    color: var(--psm-muted);
+    border-radius: var(--psm-radius-sm);
+}
+
+html body .bootstrap .nav-pills > li > a:hover {
+    color: var(--psm-text);
+    background-color: var(--psm-surface-soft);
+}
+
+html body .bootstrap .nav-pills > li.active > a,
+html body .bootstrap .nav-pills > li.active > a:hover,
+html body .bootstrap .nav-pills > li.active > a:focus {
+    color: var(--psm-accent-dark);
+    background-color: var(--psm-accent-soft);
+}
+
+/* The theme underlines every link in #content (a11y) - in tabs and stats
+   lists the underline is kept for hover only */
+html body #content.bootstrap .nav-pills > li > a[href],
+html body #content.bootstrap #dashboard .data_list a[href] {
+    text-decoration: none;
+}
+
+html body #content.bootstrap #dashboard .data_list a[href]:hover {
+    text-decoration: underline;
+}
+
+/* Tiles above the chart (dashtrends). dashtrends.js sets an inline background-color
+   on the active tile (series color) and "inherit" on the others - hence !important */
+html body .bootstrap #dashboard #dashtrends dl {
+    background-color: var(--psm-surface) !important;
+    border-color: var(--psm-border);
+    box-shadow: none;
+    transition: background-color .15s ease, box-shadow .15s ease;
+}
+
+html body .bootstrap #dashboard #dashtrends dl:hover {
+    background-color: var(--psm-surface-soft) !important;
+}
+
+html body .bootstrap #dashboard #dashtrends dl.active {
+    background-color: var(--psm-accent-soft) !important;
+    box-shadow: inset 0 -3px 0 var(--psm-accent);
+}
+
+html body .bootstrap #dashboard #dashtrends #dashtrends_toolbar dl dt {
+    color: var(--psm-muted);
+}
+
+html body .bootstrap #dashboard #dashtrends #dashtrends_toolbar dl dd.data_value {
+    color: var(--psm-text);
+}
+
+html body .bootstrap #dashboard #dashtrends #dashtrends_toolbar dl.active dt,
+html body .bootstrap #dashboard #dashtrends #dashtrends_toolbar dl.active dd.data_value {
+    color: var(--psm-accent-dark);
+}
+
+html body .bootstrap #dashboard #dashtrends #dashtrends_toolbar dl:hover dt {
+    text-decoration: none;
+}
+
+html body .bootstrap #dashboard #dashtrends #dashtrends_toolbar dl dd.dash_trend {
+    background-color: transparent;
+}
+
+/* Chart (nvd3): axes and grid in palette colors instead of black */
+html body #dashboard .nvd3 text {
+    fill: var(--psm-muted);
+}
+
+html body #dashboard .nvd3 .nv-axis line,
+html body #dashboard .nvd3 .nv-axis path.domain {
+    stroke: var(--psm-border);
+}
+
+/* ---------- Statuses ---------- */
+/* Outline via inset box-shadow, not border - a border made badges 2px taller
+   and stretched dense tables (e.g. recent orders on the dashboard) */
+html body .badge {
+    box-shadow: inset 0 0 0 1px var(--psm-badge-ring, transparent);
+}
+
+html body .badge-success,
+html body .label-success,
+html body .badge-success-outline {
+    background: var(--psm-success-soft);
+    --psm-badge-ring: var(--psm-success-border);
+    color: var(--psm-success);
+}
+
+html body .badge-warning,
+html body .label-warning {
+    background: var(--psm-warning-soft);
+    --psm-badge-ring: var(--psm-warning-border);
+    color: var(--psm-warning);
+}
+
+html body .badge-danger,
+html body .label-danger {
+    background: var(--psm-danger-soft);
+    --psm-badge-ring: var(--psm-danger-border);
+    color: var(--psm-danger);
+}
+
+html body .badge-info,
+html body .label-info {
+    background: var(--psm-info-soft);
+    --psm-badge-ring: var(--psm-info-border);
+    color: var(--psm-info);
+}
+
+/* ---------- Alerts ---------- */
+html body .alert {
+    border-radius: var(--psm-radius);
+}
+
+html body .alert-success {
+    background: var(--psm-success-soft);
+    border-color: var(--psm-success-border);
+    color: var(--psm-success);
+}
+
+html body .alert-warning {
+    background: var(--psm-warning-soft);
+    border-color: var(--psm-warning-border);
+    color: var(--psm-warning);
+}
+
+html body .alert-danger {
+    background: var(--psm-danger-soft);
+    border-color: var(--psm-danger-border);
+    color: var(--psm-danger);
+}
+
+html body .alert-info {
+    background: var(--psm-info-soft);
+    border-color: var(--psm-info-border);
+    color: var(--psm-info);
+}
+
+/* ---------- Tabs ---------- */
+html body .nav-tabs {
+    border-bottom-color: var(--psm-border);
+}
+
+html body .nav-tabs .nav-link {
+    color: var(--psm-muted);
+}
+
+html body .nav-tabs .nav-link:hover {
+    background: var(--psm-surface-soft);
+    color: #344054;
+}
+
+html body .nav-tabs .nav-link.active {
+    color: var(--psm-accent-dark);
+    font-weight: 700;
+}
+
+/* ---------- Dropdowns ---------- */
+html body .dropdown-menu {
+    background: var(--psm-surface);
+    border: 1px solid var(--psm-border);
+    border-radius: var(--psm-radius);
+    box-shadow: 0 10px 30px rgba(16,24,40,.12);
+}
+
+html body .dropdown-item:hover,
+html body .dropdown-item:focus {
+    background: var(--psm-accent-soft);
+    color: var(--psm-accent-dark);
+}
+
+/* ---------- Breadcrumb / muted text ---------- */
+html body .breadcrumb {
+    background: transparent;
+}
+
+html body .text-muted,
+html body .help-block,
+html body .form-text {
+    color: var(--psm-muted) !important;
+}
+
+/* ---------- Checkboxes ---------- */
+html body .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--psm-accent);
+    border-color: var(--psm-accent);
+}
+
+/* ---------- Subtle separators ---------- */
+html body hr {
+    border-top-color: var(--psm-border);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    html body .btn,
+    html body .nav-bar a {
+        transition: none;
+    }
+}
