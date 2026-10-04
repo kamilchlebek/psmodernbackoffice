@@ -125,6 +125,11 @@ git tag v1.0.1 && git push origin v1.0.1
 
 GitHub Actions checks that the tag matches the module version, builds `psmodernbackoffice.zip` and publishes it as a release asset.
 
+## Changelog
+
+### 1.0.0
+- First public release.
+
 ## License
 
 [MIT](LICENSE) © Kamil Chlebek
